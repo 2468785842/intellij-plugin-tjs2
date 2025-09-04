@@ -39,3 +39,4 @@ bin/
 ### Mac OS ###
 .DS_Store
 /src/main/gen/
+/.kotlin/sessions/kotlin-compiler-*.salive
