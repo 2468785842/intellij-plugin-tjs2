@@ -1,0 +1,36 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>org.github.tjs2</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/best-practices-for-listing.html#plugin-name -->
+    <name>Tjs2</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor url="https://github.com/2468785842">2468785842</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/best-practices-for-listing.html#plugin-description -->
+    <description><![CDATA[
+        tjs2 scripts support<br>
+        <em>tvp tjs2 scripts support</em>
+    ]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <fileType name="TJS2 File" implementationClass="org.github.tjs2.TJS2FileType" fieldName="INSTANCE"
+                  language="TJS2" extensions="tjs"/>
+        <lang.parserDefinition
+                language="TJS2"
+                implementationClass="org.github.tjs2.TJS2ParserDefinition"/>
+        <lang.syntaxHighlighterFactory
+                language="TJS2"
+                implementationClass="org.github.tjs2.TJS2SyntaxHighlighterFactory"/>
+    </extensions>
+</idea-plugin>
