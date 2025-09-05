@@ -28,6 +28,7 @@ statement : ';'
             | 'debugger' ';'
             | variable_def
             | func_def
+            | func_decl
             | property_def
             | class_def
             | return
@@ -81,6 +82,9 @@ variable_type : (':' (T_SYMBOL | T_VOID | T_INT | T_REAL | T_STRING | T_OCTET))?
 
 // 函数定义
 func_def : 'function' T_SYMBOL func_decl_arg_opt variable_type block;
+
+// 函数声明
+func_decl : 'function' T_SYMBOL func_decl_arg_opt variable_type ';';
 
 // 函数表达式定义
 func_expr_def : 'function' func_decl_arg_opt variable_type block;

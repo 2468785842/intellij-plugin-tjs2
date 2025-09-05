@@ -48,10 +48,15 @@ class TJS2SyntaxHighlighter : SyntaxHighlighter {
         val ttype = tokenType.antlrTokenType
         return when (ttype) {
             TJS2Lexer.T_SYMBOL -> SYMBOL_KEYS
-            in TJS2TokenSets.KEYWORD -> KEYWORD_KEYS
+
+            in TJS2TokenSets.KEYWORD,
+            TJS2Lexer.MACRO_SET,
+            TJS2Lexer.MACRO_IF_END,
+            TJS2Lexer.MACRO_IF_START-> KEYWORD_KEYS
+
             TJS2Lexer.T_STRING_LITERAL -> STRING_KEYS
             in TJS2TokenSets.NUMBER -> NUMBER_KEYS
-            in TJS2TokenSets.MACRO -> MACRO_KEYS
+//            in TJS2TokenSets.MACRO -> MACRO_KEYS
             TJS2Lexer.T_LINE_COMMENT -> LINE_COMMENT_KEYS
             TJS2Lexer.T_BLOCK_COMMENT -> BLOCK_COMMENT_KEYS
             TJS2Lexer.BAD_CHARACTER -> BAD_CHAR_KEYS
