@@ -2,7 +2,6 @@ package org.github.tjs2.psi
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement
 import com.intellij.lang.ASTNode
-import com.intellij.lang.tree.util.children
 import com.intellij.psi.LiteralTextEscaper
 import com.intellij.psi.PsiLanguageInjectionHost
 import org.antlr.intellij.adaptor.lexer.TokenIElementType
@@ -11,9 +10,10 @@ import org.github.tjs2.adaptors.parser.PsiElementFactory
 
 class FactorExprNode(node: ASTNode?) : ASTWrapperPsiElement(node!!), PsiLanguageInjectionHost {
 
+    /**
+     * if is true: childNodes count always two
+     */
     fun isRegexpExpr(): Boolean {
-        if(node.children().count() != 1)
-            return false
         val et = node.firstChildNode.elementType
         if(et !is TokenIElementType)
             return false

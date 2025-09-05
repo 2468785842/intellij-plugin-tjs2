@@ -17,7 +17,6 @@ class TJS2SyntaxHighlighter : SyntaxHighlighter {
         val KEYWORD = createTextAttributesKey("TJS2_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD)
         val STRING = createTextAttributesKey("TJS2_STRING", DefaultLanguageHighlighterColors.STRING)
         val NUMBER = createTextAttributesKey("TJS2_NUMBER", DefaultLanguageHighlighterColors.NUMBER)
-        val MACRO = createTextAttributesKey("TJS2_MACRO", DefaultLanguageHighlighterColors.METADATA)
 
         val LINE_COMMENT =
             createTextAttributesKey("TJS2_LINE_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT)
@@ -32,7 +31,6 @@ class TJS2SyntaxHighlighter : SyntaxHighlighter {
         val BAD_CHAR_KEYS= arrayOf<TextAttributesKey>(BAD_CHARACTER)
         val STRING_KEYS = arrayOf<TextAttributesKey>(STRING)
         val NUMBER_KEYS = arrayOf<TextAttributesKey>(NUMBER)
-        val MACRO_KEYS = arrayOf<TextAttributesKey>(MACRO)
 
         val LINE_COMMENT_KEYS= arrayOf<TextAttributesKey>(LINE_COMMENT)
         val BLOCK_COMMENT_KEYS= arrayOf<TextAttributesKey>(BLOCK_COMMENT)
@@ -50,13 +48,13 @@ class TJS2SyntaxHighlighter : SyntaxHighlighter {
             TJS2Lexer.T_SYMBOL -> SYMBOL_KEYS
 
             in TJS2TokenSets.KEYWORD,
+            TJS2Lexer.T_REGEXP_PATTERN,
             TJS2Lexer.MACRO_SET,
             TJS2Lexer.MACRO_IF_END,
-            TJS2Lexer.MACRO_IF_START-> KEYWORD_KEYS
+            TJS2Lexer.MACRO_IF_START -> KEYWORD_KEYS
 
             TJS2Lexer.T_STRING_LITERAL -> STRING_KEYS
             in TJS2TokenSets.NUMBER -> NUMBER_KEYS
-//            in TJS2TokenSets.MACRO -> MACRO_KEYS
             TJS2Lexer.T_LINE_COMMENT -> LINE_COMMENT_KEYS
             TJS2Lexer.T_BLOCK_COMMENT -> BLOCK_COMMENT_KEYS
             TJS2Lexer.BAD_CHARACTER -> BAD_CHAR_KEYS

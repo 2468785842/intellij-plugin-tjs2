@@ -287,7 +287,7 @@ factor_expr: constval
               | inline_dic
               | const_inline_array
               | const_inline_dic
-              | T_REG_EXPR_LITERAL
+              | T_REG_EXPR_LITERAL T_REGEXP_PATTERN?
               | '(' expr ')'
               | '.' T_SYMBOL;
 

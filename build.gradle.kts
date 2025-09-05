@@ -38,6 +38,7 @@ dependencies {
     intellijPlatform {
         create("IC", "2025.1.4.1")
         plugin("PsiViewer:2025.1")
+        plugin("com.google.ide-perf:1.3.2")
         bundledPlugin("org.intellij.intelliLang")
         testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
 

@@ -21,46 +21,31 @@ public abstract class TJS2LexerBase extends Lexer {
         return next;
     }
 
+    protected boolean isRegexPattern() {
+        return this.lastToken != null && this.lastToken.getType() == TJS2Lexer.T_REG_EXPR_LITERAL;
+    }
+
     protected boolean isRegexPossible() {
 
         if (this.lastToken == null) {
             return true;
         }
 
-        switch (this.lastToken.getType()) {
-            case TJS2Lexer.T_CATCH:
-            case TJS2Lexer.T_TRY:
-            case TJS2Lexer.T_CASE:
-            case TJS2Lexer.T_DEFAULT:
-            case TJS2Lexer.T_WITH:
-            case TJS2Lexer.T_SWITCH:
-            case TJS2Lexer.T_WHILE:
-            case TJS2Lexer.T_EXTENDS:
-            case TJS2Lexer.T_CLASS:
-            case TJS2Lexer.T_GETTER:
-            case TJS2Lexer.T_SETTER:
-            case TJS2Lexer.T_PROPERTY:
-            case TJS2Lexer.T_DEBUGGER:
-            case TJS2Lexer.T_SYMBOL:
-            case TJS2Lexer.T_NULL_LITERAL:
-            case TJS2Lexer.T_BOOL_LITERAL:
-            case TJS2Lexer.T_THIS:
-            case TJS2Lexer.T_RBRACE:
-            case TJS2Lexer.T_RPARENTHESIS:
-            case TJS2Lexer.T_OCT_STREAM_LITERAL:
-            case TJS2Lexer.T_BIN_NUMBER_LITERAL:
-            case TJS2Lexer.T_HEX_NUMBER_LITERAL:
-            case TJS2Lexer.T_REAL_LITERAL:
-            case TJS2Lexer.T_DEC_NUMBER_LITERAL:
-            case TJS2Lexer.T_OCT_NUMBER_LITERAL:
-            case TJS2Lexer.T_CHAR_LITERAL:
-            case TJS2Lexer.T_STRING_LITERAL:
-            case TJS2Lexer.T_PLUS:
-            case TJS2Lexer.T_MINUS:
-                return false;
-            default:
-                return true;
-        }
+        return switch (this.lastToken.getType()) {
+            case TJS2Lexer.T_CATCH, TJS2Lexer.T_TRY, TJS2Lexer.T_CASE,
+                 TJS2Lexer.T_DEFAULT, TJS2Lexer.T_WITH,
+                 TJS2Lexer.T_SWITCH, TJS2Lexer.T_WHILE,
+                 TJS2Lexer.T_EXTENDS, TJS2Lexer.T_CLASS, TJS2Lexer.T_GETTER,
+                 TJS2Lexer.T_SETTER, TJS2Lexer.T_PROPERTY, TJS2Lexer.T_DEBUGGER,
+                 TJS2Lexer.T_SYMBOL, TJS2Lexer.T_NULL_LITERAL, TJS2Lexer.T_BOOL_LITERAL,
+                 TJS2Lexer.T_THIS, TJS2Lexer.T_RBRACE, TJS2Lexer.T_RPARENTHESIS,
+                 TJS2Lexer.T_OCT_STREAM_LITERAL, TJS2Lexer.T_BIN_NUMBER_LITERAL,
+                 TJS2Lexer.T_HEX_NUMBER_LITERAL, TJS2Lexer.T_REAL_LITERAL,
+                 TJS2Lexer.T_DEC_NUMBER_LITERAL, TJS2Lexer.T_OCT_NUMBER_LITERAL,
+                 TJS2Lexer.T_CHAR_LITERAL, TJS2Lexer.T_STRING_LITERAL,
+                 TJS2Lexer.T_PLUS, TJS2Lexer.T_MINUS -> false;
+            default -> true;
+        };
     }
 
     @Override

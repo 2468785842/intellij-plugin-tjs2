@@ -15,8 +15,9 @@ T_BLOCK_COMMENT: '/*' .*? '*/' -> channel(HIDDEN);
 
 WS: [ \t\r\n\f]+ -> channel(HIDDEN);
 T_REG_EXPR_LITERAL:
-    '/' '='? RegularExpressionFirstChar RegularExpressionChar* {this.isRegexPossible()}? '/' [gli]*
-;
+    '/' '='? RegularExpressionFirstChar RegularExpressionChar* {this.isRegexPossible()}? '/';
+
+T_REGEXP_PATTERN: {this.isRegexPattern()}? [gil]+;
 
 T_NEW: 'new';
 T_DELETE: 'delete';
@@ -85,7 +86,6 @@ T_OCT_NUMBER_LITERAL: '0' [0-7]+ ('.' [0-7]+)?;
 
 T_CHAR_LITERAL: '\'' (~['\\\r\n] | EscapeSequence)* '\'';
 T_STRING_LITERAL: '"' (~["\r\n] | EscapeSequence)* '"';
-T_REGEXP_PATTERN: [gil];
 
 T_COMMA: '=>' | ',';
 T_AMPERSANDEQUAL: '&=';

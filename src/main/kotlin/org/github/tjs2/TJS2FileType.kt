@@ -1,6 +1,7 @@
 package org.github.tjs2
 
 import com.intellij.openapi.fileTypes.LanguageFileType
+import com.intellij.openapi.fileTypes.PlainTextFileType
 import org.jetbrains.annotations.NotNull
 import javax.swing.Icon
 
@@ -18,7 +19,7 @@ class TJS2FileType : LanguageFileType(TJS2Language.INSTANCE) {
 
     @NotNull
     override fun getDescription(): String {
-        return "tjs language file"
+        return "TJS language file"
     }
 
     @NotNull
@@ -26,8 +27,8 @@ class TJS2FileType : LanguageFileType(TJS2Language.INSTANCE) {
         return "tjs"
     }
 
-    override fun getIcon(): Icon? {
-        return null
+    override fun getIcon(): Icon {
+        return PlainTextFileType.INSTANCE.icon
     }
 
 }
