@@ -1,5 +1,9 @@
 ﻿lexer grammar TJS2Lexer;
 
+options {
+    superClass = TJS2LexerBase;
+}
+
 @lexer::members {
     boolean marcoExprExpect = false;
     int macroExprParenDepth = 0;
@@ -10,6 +14,9 @@ T_LINE_COMMENT: '//' ~[\r\n]* -> channel(HIDDEN);
 T_BLOCK_COMMENT: '/*' .*? '*/' -> channel(HIDDEN);
 
 WS: [ \t\r\n\f]+ -> channel(HIDDEN);
+T_REG_EXPR_LITERAL:
+    '/' '='? RegularExpressionFirstChar RegularExpressionChar* {this.isRegexPossible()}? '/' [gli]*
+;
 
 T_NEW: 'new';
 T_DELETE: 'delete';
@@ -168,3 +175,19 @@ fragment EscapeSequence:
     | '\\' 'u005c'? ([0-3]? [0-7])? [0-7]
     | '\\' 'u'+ HexDigit HexDigit HexDigit HexDigit
 ;
+
+fragment RegularExpressionFirstChar:
+    ~[*\r\n\\/[]
+    | RegularExpressionBackslashSequence
+    | '[' RegularExpressionClassChar* ']'
+;
+
+fragment RegularExpressionChar:
+    ~[\r\n\\/[]
+    | RegularExpressionBackslashSequence
+    | '[' RegularExpressionClassChar* ']'
+;
+
+fragment RegularExpressionClassChar: ~[\r\n\]\\] | RegularExpressionBackslashSequence;
+
+fragment RegularExpressionBackslashSequence: '\\' ~[\r\n];

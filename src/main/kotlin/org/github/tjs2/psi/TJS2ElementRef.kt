@@ -11,7 +11,7 @@ import org.antlr.intellij.adaptor.psi.ScopeNode
 abstract class TJS2ElementRef(element: IdentifierPSINode) :
     PsiReferenceBase<IdentifierPSINode?>(element, TextRange(0, element.text.length)) {
     override fun getVariants(): Array<Any?> {
-        return arrayOfNulls<Any>(0)
+        return arrayOfNulls(0)
     }
 
     /** Change the REFERENCE's ID node (not the targeted def's ID node)

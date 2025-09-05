@@ -4,20 +4,23 @@ import com.intellij.lang.ASTFactory
 import com.intellij.lang.ASTNode
 import com.intellij.psi.PsiElement
 import com.intellij.psi.tree.IElementType
-import org.antlr.intellij.adaptor.lexer.RuleIElementType
-import org.antlr.intellij.adaptor.lexer.TokenIElementType
 import org.antlr.intellij.adaptor.psi.ANTLRPsiNode
+import org.github.tjs2.adaptors.parser.PsiElementFactory
+import org.github.tjs2.psi.FactorExprNode
 
 
 class TJS2ASTFactory : ASTFactory() {
 
     companion object {
-//    val ruleElementTypeToPsiFactory: MutableMap<IElementType?, PsiElementFactory?> = HashMap()
-//        init
-//        {
-//            with(ruleElementTypeToPsiFactory) {
-//                put(TJS2TokenTypes.RULE_ELEMENT_TYPES)
-//            }
+    val ruleElementTypeToPsiFactory: MutableMap<IElementType?, PsiElementFactory> = HashMap()
+        init {
+            with(ruleElementTypeToPsiFactory) {
+                put(
+                    TJS2TokenTypes.RULE_ELEMENT_TYPES[TJS2Parser.RULE_factor_expr],
+                    FactorExprNode.Factory.INSTANCE
+                )
+            }
+        }
     // later auto gen with tokens from some spec in grammar?
 //            ruleElementTypeToPsiFactory.put(
 //                ANTLRv4TokenTypes.RULE_ELEMENT_TYPES.get(ANTLRv4Parser.RULE_rules),
@@ -48,29 +51,16 @@ class TJS2ASTFactory : ASTFactory() {
 //                TokenSpecNode.Factory.INSTANCE
 //            );
 //        }
-//        fun createInternalParseTreeNode(node: ASTNode): PsiElement? {
-//            val t: PsiElement?
-//            val tokenType: IElementType = node.elementType
-//            val factory: PsiElementFactory? = ruleElementTypeToPsiFactory[tokenType]
-//            t = if (factory != null) {
-//                factory.createElement(node)
-//            } else {
-//                ASTWrapperPsiElement(node)
-//            }
-//
-//            return t
-//        }
-
         fun createInternalParseTreeNode(node: ASTNode): PsiElement {
-            val elType: IElementType = node.elementType
+            val tokenType: IElementType = node.elementType
+            val factory: PsiElementFactory? = ruleElementTypeToPsiFactory[tokenType]
+            return if (factory != null) {
+                factory.createElement(node)!!
+            } else {
+                ANTLRPsiNode(node)
+            }
 
-            if ( elType is TokenIElementType) {
-                return ANTLRPsiNode(node);
-            }
-            if ( elType !is RuleIElementType ) {
-                return ANTLRPsiNode(node);
-            }
-            return ANTLRPsiNode(node)
         }
+
     }
 }

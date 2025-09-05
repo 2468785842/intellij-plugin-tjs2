@@ -32,5 +32,10 @@
         <lang.syntaxHighlighterFactory
                 language="TJS2"
                 implementationClass="org.github.tjs2.TJS2SyntaxHighlighterFactory"/>
+        <lang.commenter
+                language="TJS2"
+                implementationClass="org.github.tjs2.TJS2Commenter"/>
+        <multiHostInjector
+                implementation="org.github.tjs2.TJS2RegexInjector"/>
     </extensions>
 </idea-plugin>
